@@ -1,0 +1,17 @@
+{
+  "name": "rts",
+  "description": "Minimalistic realtime strategy",
+  "version": "0.1.0",
+  "author": "Ilya Lakhin (Илья Александрович Лахин) eliah.lakhin@gmail.com",
+  "devDependencies": {
+    "gulp": "~3.4.0",
+    "gulp-coffee": "~1.3.0",
+    "gulp-browserify": "~0.3.3",
+    "gulp-jade": "~0.3.0",
+    "gulp-watch": "~0.5.0",
+    "gulp-serve": "Eliah-Lakhin/gulp-serve",
+    "gulp-livereload": "~0.2.0",
+    "tiny-lr": "~0.0.5",
+    "connect-livereload": "~0.3.2"
+  }
+}
