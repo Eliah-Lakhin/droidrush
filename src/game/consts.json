@@ -1,0 +1,10 @@
+{
+  "field": {
+    "width": 400,
+    "height": 400
+  },
+  "grid": {
+    "vertical": 20,
+    "horizontal": 20
+  }
+}

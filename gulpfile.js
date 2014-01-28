@@ -2,12 +2,13 @@ var gulp = require('gulp');
 var debug = require('gulp-debug');
 var watch = require('gulp-watch');
 var rename = require('gulp-rename');
+var browserify = require('gulp-browserify');
 
 var server = require('tiny-lr')();
 
 gulp.task('default', ['compile', 'live']);
 
-gulp.task('compile', ['jade', 'coffee']);
+gulp.task('compile', ['jade', 'script']);
 
 gulp.task('jade', function() {
   watch({glob: './src/**/*.jade'})
@@ -15,14 +16,26 @@ gulp.task('jade', function() {
     .pipe(gulp.dest('./build'));
 });
 
-gulp.task('coffee', function() {
+gulp.task('script', function() {
+  gulp
+    .src('node_modules/pixi/index.js', {read: false})
+    .pipe(browserify())
+    .on('prebundle', function(bundle) {
+      bundle.require('pixi');
+    })
+    .pipe(rename('pixi.js'))
+    .pipe(gulp.dest('./build/vendor'));
+
   watch({glob: './src/**/*.coffee'}, function() {
     gulp
       .src('./src/index.coffee', {read: false})
-      .pipe(require('gulp-browserify')({
+      .pipe(browserify({
         transform: ['coffeeify'],
         extensions: ['.coffee']
       }))
+      .on('prebundle', function(bundle) {
+        bundle.external('pixi');
+      })
       .pipe(rename('index.js'))
       .pipe(gulp.dest('./build'));
   });

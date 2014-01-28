@@ -14,7 +14,8 @@
     "tiny-lr": "~0.0.5",
     "connect-livereload": "~0.3.2",
     "coffeeify": "~0.5.2",
-    "gulp-rename": "~0.2.2"
+    "gulp-rename": "~0.2.2",
+    "pixi": "~0.2.1"
   },
   "devDependencies": {
     "gulp-debug": "~0.1.2"
