@@ -1,0 +1,24 @@
+{
+  "field": {
+    "width": 600,
+    "height": 600,
+    "padding": 50
+  },
+  "grid": {
+    "vertical": 10,
+    "horizontal": 10
+  },
+  "cell": {
+    "count": 20,
+    "speed": 2,
+    "minRadius": 5,
+    "minSize": 15
+  },
+  "colors": {
+    "bg": 0x4f4f4f,
+    "free": 0xefefef,
+    "red": 0xff7f7f,
+    "green": 0x7fff7f,
+    "blue": 0x7f7fff
+  }
+}

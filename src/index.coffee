@@ -1,5 +1,5 @@
 pixi = require 'pixi'
-Field = require './game/Field'
+Field = require './engine/Field'
 
 field = new Field
 
