@@ -36,6 +36,7 @@ gulp.task('script', function() {
       .on('prebundle', function(bundle) {
         bundle.external('pixi');
       })
+      .on('error', console.warn)
       .pipe(rename('index.js'))
       .pipe(gulp.dest('./build'));
   });
