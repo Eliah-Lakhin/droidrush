@@ -18,10 +18,10 @@ gulp.task('jade', function() {
 
 gulp.task('script', function() {
   gulp
-    .src('node_modules/pixi/index.js', {read: false})
+    .src('node_modules/pixi.js/bin/pixi.js', {read: false})
     .pipe(browserify())
     .on('prebundle', function(bundle) {
-      bundle.require('pixi');
+      bundle.require('pixi.js', {expose: 'pixi'});
     })
     .pipe(rename('pixi.js'))
     .pipe(gulp.dest('./build/vendor'));
