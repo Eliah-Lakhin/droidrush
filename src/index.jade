@@ -1,7 +1,11 @@
 doctype html
 html(lang="en")
     head
-        script(src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js")
+        script(src="/vendor/jquery.js")
         script(src="/vendor/pixi.js")
+        script(src="/vendor/events.js")
+        script(src="/vendor/raf.js")
+        script(src="/vendor/seed-random.js")
     body
+        canvas(id="main")
         script(src="/index.js")

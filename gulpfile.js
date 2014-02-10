@@ -3,6 +3,7 @@ var debug = require('gulp-debug');
 var watch = require('gulp-watch');
 var rename = require('gulp-rename');
 var browserify = require('gulp-browserify');
+var _ = require('underscore');
 
 var server = require('tiny-lr')();
 
@@ -17,16 +18,30 @@ gulp.task('jade', function() {
 });
 
 gulp.task('script', function() {
-  gulp
-    .src('node_modules/pixi.js/bin/pixi.js', {read: false})
-    .pipe(browserify())
-    .on('prebundle', function(bundle) {
-      bundle.require('pixi.js', {expose: 'pixi'});
-    })
-    .pipe(rename('pixi.js'))
-    .pipe(gulp.dest('./build/vendor'));
+  var modules = ['pixi.js', 'events', 'raf', 'seed-random'];
+  var dependencies = {
+    'raf': ['events']
+  };
 
-  watch({glob: './src/**/*.coffee'}, function() {
+  modules.forEach(function(module) {
+    var outputFile = module;
+
+    if (outputFile.substr(outputFile.length - 3) !== '.js') outputFile += '.js';
+
+    gulp
+      .src('node_modules/' + module, {read: false})
+      .pipe(browserify())
+      .on('prebundle', function(bundle) {
+        bundle.require(module);
+        if (dependencies[module])
+          dependencies[module]
+            .forEach(function(module) {bundle.external(module);});
+      })
+      .pipe(rename(outputFile))
+      .pipe(gulp.dest('./build/vendor'));
+  });
+
+  watch({glob: './src/engine/**/*'}, function() {
     gulp
       .src('./src/index.coffee', {read: false})
       .pipe(browserify({
@@ -34,7 +49,7 @@ gulp.task('script', function() {
         extensions: ['.coffee']
       }))
       .on('prebundle', function(bundle) {
-        bundle.external('pixi');
+        modules.forEach(function(module) {bundle.external(module);});
       })
       .on('error', console.warn)
       .pipe(rename('index.js'))

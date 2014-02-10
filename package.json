@@ -15,7 +15,10 @@
     "connect-livereload": "~0.3.2",
     "coffeeify": "~0.5.2",
     "gulp-rename": "~0.2.2",
-    "pixi.js": "~1.4.3"
+    "pixi.js": "~1.4.3",
+    "raf": "0.0.3",
+    "events": "~1.0.0",
+    "seed-random": "~2.2.0"
   },
   "devDependencies": {
     "gulp-debug": "~0.1.2"

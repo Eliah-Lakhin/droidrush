@@ -1,8 +1,11 @@
-pixi = require 'pixi'
-Field = require './engine/Field'
+pixi = require 'pixi.js'
+raf = require 'raf'
+Scene = require './engine/Scene'
+Map = require './engine/Map'
 
-field = new Field
+map = new Map Math.random()
+scene = new Scene document.getElementById('main'), map
 
-document.body.appendChild field.getCannvas()
+raf().on 'data', (delta) ->
+  scene.render()
 
-field.render()
