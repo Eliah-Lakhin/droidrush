@@ -17,13 +17,16 @@
     "production": {
       "min": 30,
       "step": 5
-    }
+    },
+    "planetDistance": 70
   },
   "colors": {
     "highlight": 0xcfcfcf,
     "bg": 0x000000,
-    "red": 0xff7f7f,
-    "green": 0x7fff7f,
-    "blue": 0x7f7fff
+    "players": [
+      ["red", 0xff7f7f],
+      ["green", 0x7fff7f],
+      ["blue", 0x7f7fff]
+    ]
   }
 }

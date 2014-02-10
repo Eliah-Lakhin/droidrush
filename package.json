@@ -18,7 +18,8 @@
     "pixi.js": "~1.4.3",
     "raf": "0.0.3",
     "events": "~1.0.0",
-    "seed-random": "~2.2.0"
+    "seed-random": "~2.2.0",
+    "extend": "~1.2.1"
   },
   "devDependencies": {
     "gulp-debug": "~0.1.2"

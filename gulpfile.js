@@ -18,7 +18,7 @@ gulp.task('jade', function() {
 });
 
 gulp.task('script', function() {
-  var modules = ['pixi.js', 'events', 'raf', 'seed-random'];
+  var modules = ['pixi.js', 'events', 'raf', 'seed-random', 'extend'];
   var dependencies = {
     'raf': ['events']
   };
@@ -41,7 +41,7 @@ gulp.task('script', function() {
       .pipe(gulp.dest('./build/vendor'));
   });
 
-  watch({glob: './src/engine/**/*'}, function() {
+  watch({glob: './src/**/*'}, function() {
     gulp
       .src('./src/index.coffee', {read: false})
       .pipe(browserify({
