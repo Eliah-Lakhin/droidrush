@@ -13,7 +13,7 @@ module.exports = class Map
     defaultDistance = $$.map.planetDistance
     homeDistance = Math.max(
       defaultDistance
-      Math.min($$.scene.width / @players, $$.scene.height / @players) * 2 - $$.planet.maxRadius * 2
+      Math.min($$.scene.width / @players, $$.scene.height / @players) * 2 - $$.planet.maxRadius * 3
     )
     defaultDistance *= defaultDistance
     homeDistance *= homeDistance
@@ -22,14 +22,14 @@ module.exports = class Map
       if homeplanet
         production = 100
       else
-        production = Math.ceil(random() * (100 - $$.map.production.min) / $$.map.production.step) *
-          $$.map.production.step + $$.map.production.min
+        production = Math.ceil(random() * ($$.map.production.max -
+          $$.map.production.min) / $$.map.production.step) * $$.map.production.step + $$.map.production.min
 
       loop
-        x1 = random() * ($$.scene.width - $$.planet.maxRadius * 2) +
-          $$.planet.maxRadius
-        y1 = random() * ($$.scene.height - $$.planet.maxRadius * 2) +
-          $$.planet.maxRadius
+        x1 = random() * ($$.scene.width - $$.planet.maxRadius * 3) +
+          $$.planet.maxRadius * 1.5
+        y1 = random() * ($$.scene.height - $$.planet.maxRadius * 3) +
+          $$.planet.maxRadius * 1.5
 
         clashes = @planets.some ({x: x2, y: y2, owner}) ->
           distance = (x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)
@@ -37,7 +37,7 @@ module.exports = class Map
           else distance < defaultDistance
         if not clashes then break
 
-      {x: x1, y: y1, production}
+      {x: Math.round(x1), y: Math.round(y1), speed: 100 / production, production}
 
     for player in [1..@players]
       do (player) =>

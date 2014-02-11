@@ -9,6 +9,13 @@
       "radius": 40,
       "types": 5
     },
+    "font": {
+      "font": "normal 11px arial",
+      "fill": "white",
+      "align": "center",
+      "stroke": "black",
+      "strokeThickness": 2
+    },
     "maxRadius": 30,
     "minDistance": 70
   },
@@ -16,9 +23,10 @@
     "planets": 15,
     "production": {
       "min": 30,
+      "max": 80,
       "step": 5
     },
-    "planetDistance": 70
+    "planetDistance": 90
   },
   "colors": {
     "highlight": 0xcfcfcf,
@@ -26,7 +34,13 @@
     "players": [
       ["red", 0xff7f7f],
       ["green", 0x7fff7f],
-      ["blue", 0x7f7fff]
+      ["blue", 0x7f7fff],
+      ["cyan", 0x00adef],
+      ["brown", 0x603913],
+      ["yellow", 0xfff200],
+      ["periwinkle", 0x8393ca],
+      ["violet", 0x4b0049],
+      ["pink", 0xf5989d] ,
     ]
   }
 }

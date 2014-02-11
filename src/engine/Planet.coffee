@@ -27,6 +27,10 @@ module.exports = class Planet extends pixi.DisplayObjectContainer
     @accenture = new pixi.Graphics
     @addChild @accenture
 
+    @caption = new pixi.Text size, $$.planet.font
+    @caption.anchor = new pixi.Point 0.5, 0.5
+    @addChild @caption
+
     @hover = false
     @mouseover = =>
       @hover = true
@@ -45,8 +49,10 @@ module.exports = class Planet extends pixi.DisplayObjectContainer
     if !!@color
       @sprite.tint = @color
       @sprite.anchor.y = 0.75
+      @caption.alpha = 0.75
     else
       @sprite.anchor.y = 0.75 - @hover / 2
+      @caption.alpha = 0.75 - @hover / 2
 
     @accenture.clear()
     if @hover or @selected
