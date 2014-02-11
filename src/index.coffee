@@ -1,10 +1,10 @@
 pixi = require 'pixi.js'
 raf = require 'raf'
-Scene = require './engine/Scene'
-Map = require './engine/Map'
+Scene = require './game/Scene'
+Engine = require './game/Engine'
 
-map = new Map Math.floor(Math.random() * 100000).toString(), 9
-scene = new Scene document.getElementById('main'), map
+engine = new Engine Math.floor(Math.random() * 100000).toString(), 3
+scene = new Scene document.getElementById('main'), engine
 
 raf().on 'data', (delta) ->
   scene.render()

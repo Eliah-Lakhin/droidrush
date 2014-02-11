@@ -19,6 +19,10 @@
     "maxRadius": 30,
     "minDistance": 70
   },
+  "trooper": {
+    "width": 10,
+    "height": 22
+  },
   "map": {
     "planets": 15,
     "production": {
@@ -40,7 +44,7 @@
       ["yellow", 0xfff200],
       ["periwinkle", 0x8393ca],
       ["violet", 0x4b0049],
-      ["pink", 0xf5989d] ,
+      ["pink", 0xf5989d]
     ]
   }
 }

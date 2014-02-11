@@ -1,9 +1,10 @@
 generator = require 'seed-random'
 $$ = require './consts'
 
-module.exports = class Map
+module.exports = class Engine
   colors: []
   planets: []
+  troopers: []
 
   constructor: (@seed, @players) ->
     console.log 'Seed: ' + @seed
