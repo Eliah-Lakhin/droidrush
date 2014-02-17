@@ -4,9 +4,8 @@ $$ = require './consts'
 module.exports = class Engine
   colors: []
   planets: []
-  troopers: []
 
-  constructor: (@seed, @players) ->
+  constructor: (@seed, @players, @me) ->
     console.log 'Seed: ' + @seed
 
     random = if @seed then generator @seed else generator()

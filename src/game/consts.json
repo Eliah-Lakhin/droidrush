@@ -10,18 +10,17 @@
       "types": 5
     },
     "font": {
-      "font": "normal 11px arial",
+      "font": "normal 14px arial",
       "fill": "white",
-      "align": "center",
-      "stroke": "black",
-      "strokeThickness": 2
+      "align": "center"
     },
     "maxRadius": 30,
     "minDistance": 70
   },
   "trooper": {
     "width": 10,
-    "height": 22
+    "height": 22,
+    "speed": 1
   },
   "map": {
     "planets": 15,

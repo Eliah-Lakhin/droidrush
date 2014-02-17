@@ -44,6 +44,11 @@ module.exports = class Planet extends pixi.DisplayObjectContainer
 
   setColor: (@color) -> @redraw()
 
+  select: (flag) ->
+    if @selected isnt flag
+      @selected = flag
+      @redraw()
+
   redraw: () ->
     radius = Math.floor($$.planet.sprite.radius * @sprite.scale.x) + 1
 
