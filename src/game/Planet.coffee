@@ -14,7 +14,8 @@ module.exports = class Planet extends pixi.DisplayObjectContainer
 
     @sprite = new pixi.Sprite.fromImage './planets.png'
     @sprite.anchor = new pixi.Point(
-      (Math.floor(Math.random() * $$.planet.sprite.types) + 0.5) / $$.planet.sprite.types
+      #(Math.floor(Math.random() * $$.planet.sprite.types) + 0.5) / $$.planet.sprite.types
+      0.1
       0.75
     )
     @sprite.scale = new pixi.Point scale, scale
@@ -48,11 +49,9 @@ module.exports = class Planet extends pixi.DisplayObjectContainer
 
     if !!@color
       @sprite.tint = @color
-      @sprite.anchor.y = 0.75
-      @caption.alpha = 0.75
+#      @sprite.anchor.y = 0.75
     else
-      @sprite.anchor.y = 0.75 - @hover / 2
-      @caption.alpha = 0.75 - @hover / 2
+#      @sprite.anchor.y = 0.75 - @hover / 2
 
     @accenture.clear()
     if @hover or @selected
