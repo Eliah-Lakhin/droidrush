@@ -32,7 +32,15 @@ module.exports = class Selection extends pixi.Graphics
       y = planet.position.y
       border = planet.hitArea.radius
       [x1, y1, x2, y2] = @rectange()
-      planet.select x1 - border <= x <= x2 + border and y1 - border <= y <= y2 + border
+
+      flag = x1 - border <= x <= x2 + border and y1 - border <= y <= y2 + border
+
+      if @stage.keyboard.shift
+        planet.select planet.selected or flag
+      else if @stage.keyboard.ctrl or @stage.keyboard.meta
+        if flag then planet.select false
+      else
+        planet.select flag
 
   rectange: -> [
     Math.min @start.x, @end.x
@@ -47,8 +55,9 @@ module.exports = class Selection extends pixi.Graphics
 
       @clear()
       @lineStyle 1, $$.colors.highlight, 1
-      @moveTo x1, y1
-      @lineTo x2, y1
-      @lineTo x2, y2
-      @lineTo x1, y2
-      @lineTo x1, y1
+      if x2 - x1 > 0 and y2 - y1 > 0
+        @moveTo x1, y1
+        @lineTo x2, y1
+        @lineTo x2, y2
+        @lineTo x1, y2
+        @lineTo x1, y1

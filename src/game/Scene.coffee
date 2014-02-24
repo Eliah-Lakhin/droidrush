@@ -3,6 +3,7 @@ $$ = require './consts'
 Planet = require './Planet'
 Trooper = require './Trooper'
 Selection = require './Selection'
+Keyboard = require 'keyboard-cjs'
 
 module.exports = class Scene extends pixi.Stage
   constructor: (canvas, engine) ->
@@ -18,6 +19,8 @@ module.exports = class Scene extends pixi.Stage
           planet.setColor $$.colors.players[engine.colors[owner - 1]][1]
 
         @addChild planet
+
+    @keyboard = new Keyboard window
 
     @selection = new Selection @
 

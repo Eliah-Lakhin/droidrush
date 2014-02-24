@@ -3,7 +3,6 @@ var debug = require('gulp-debug');
 var watch = require('gulp-watch');
 var rename = require('gulp-rename');
 var browserify = require('gulp-browserify');
-var _ = require('underscore');
 
 var server = require('tiny-lr')();
 
@@ -18,7 +17,9 @@ gulp.task('jade', function() {
 });
 
 gulp.task('script', function() {
-  var modules = ['pixi.js', 'events', 'raf', 'seed-random', 'extend'];
+  var modules = ['pixi.js', 'events', 'raf', 'seed-random', 'extend',
+    'keyboard-cjs'];
+
   var dependencies = {
     'raf': ['events']
   };
