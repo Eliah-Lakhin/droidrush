@@ -1,1 +1,0 @@
-Minimalistic realtime strategy videogame.
