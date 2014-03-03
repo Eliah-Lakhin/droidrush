@@ -24,8 +24,6 @@ module.exports = class Engine
   planets: []
 
   constructor: (@seed, @players, @me) ->
-    console.log 'Seed: ' + @seed
-
     random = if @seed then generator @seed else generator()
 
     defaultDistance = $$.map.planetDistance

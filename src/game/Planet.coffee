@@ -18,9 +18,10 @@
 
 pixi = require 'pixi.js'
 $$ = require './consts'
+session = require './session'
 
 module.exports = class Planet extends pixi.DisplayObjectContainer
-  constructor: (x, y, size) ->
+  constructor: (player, x, y, size) ->
     super()
 
     @color = false
@@ -58,11 +59,17 @@ module.exports = class Planet extends pixi.DisplayObjectContainer
       @hover = false
       @redraw()
 
+    @setOwner player
+
+  setOwner: (@owner) ->
+    @color =
+      if @owner > 0 then $$.colors.players[session().colors[owner - 1]][1]
+      else false
     @redraw()
 
-  setColor: (@color) -> @redraw()
-
   select: (flag) ->
+    flag = flag and session().me is @owner
+
     if @selected isnt flag
       @selected = flag
       @redraw()
@@ -77,6 +84,7 @@ module.exports = class Planet extends pixi.DisplayObjectContainer
 #      @sprite.anchor.y = 0.75 - @hover / 2
 
     @accenture.clear()
+    if  @selected then @accenture.lineStyle 2, $$.colors.selfHighlight, 0.5
+    else if @hover then @accenture.lineStyle 1, $$.colors.highlight, 1
     if @hover or @selected
-      @accenture.lineStyle 1, $$.colors.highlight, 1
       @accenture.drawCircle 0, 0, radius + 7

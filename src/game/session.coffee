@@ -16,31 +16,12 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ###
 
-pixi = require 'pixi.js'
-$$ = require './consts'
-Planet = require './Planet'
-Trooper = require './Trooper'
-Selection = require './Selection'
-Keyboard = require 'keyboard-cjs'
-session = require './session'
+Engine = require './Engine'
 
-module.exports = class Scene extends pixi.Stage
-  constructor: (canvas) ->
-    super $$.colors.bg
+session = null
 
-    engine = session()
+getter = -> session
 
-    @renderer = pixi.autoDetectRenderer $$.scene.width, $$.scene.height, canvas,
-      false, true
+getter.init = (value) -> session = value
 
-    for {x, y, production, id, owner} in engine.planets
-      planet = new Planet owner, x, y, production
-
-      @addChild planet
-
-    @keyboard = new Keyboard window
-
-    @selection = new Selection @
-
-  render: ->
-    @renderer.render @
+module.exports = getter

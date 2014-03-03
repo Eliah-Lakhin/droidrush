@@ -20,9 +20,12 @@ pixi = require 'pixi.js'
 raf = require 'raf'
 Scene = require './game/Scene'
 Engine = require './game/Engine'
+session = require './game/session'
 
-engine = new Engine Math.floor(Math.random() * 100000).toString(), 3, 1
-scene = new Scene document.getElementById('main'), engine
+seed = Math.floor(Math.random() * 100000).toString()
+console.log 'Seed: ' + seed
+session.init new Engine seed, 3, 1
+scene = new Scene document.getElementById('main')
 
 raf().on 'data', (delta) ->
   scene.render()

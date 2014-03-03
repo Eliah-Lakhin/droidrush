@@ -33,6 +33,7 @@
   },
   "colors": {
     "highlight": 0xcfcfcf,
+    "selfHighlight": 0x2fef2f,
     "bg": 0x000000,
     "players": [
       ["red", 0xff7f7f],
