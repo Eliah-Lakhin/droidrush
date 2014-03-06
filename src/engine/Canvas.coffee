@@ -17,9 +17,19 @@
 ###
 
 pixi = require 'pixi.js'
+$$ = require './consts'
 
-module.exports = class Trooper extends pixi.Sprite
-  constructor: ->
-    super pixi.Texture.fromImage './trooper.png'
+module.exports = class Canvas extends pixi.Stage
+  constructor: (settings) ->
+    super $$.colors.bg
 
-    @anchor = new pixi.Point 0.5, 0.5
+    @renderer = pixi.autoDetectRenderer(
+      $$.scene.width
+      $$.scene.height
+      settings.canvas
+      false
+      true
+    )
+
+  render: ->
+    @renderer.render @
