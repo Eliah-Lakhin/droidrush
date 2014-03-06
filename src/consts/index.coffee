@@ -16,20 +16,6 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ###
 
-pixi = require 'pixi.js'
-$$ = require '../consts/.'
-
-module.exports = class Canvas extends pixi.Stage
-  constructor: (settings) ->
-    super $$.ui.canvas.bg.color
-
-    @renderer = pixi.autoDetectRenderer(
-      $$.ui.canvas.width
-      $$.ui.canvas.height
-      settings.canvas
-      false
-      true
-    )
-
-  render: ->
-    @renderer.render @
+module.exports =
+  ui: require './ui.json'
+  game: require './game.json'
