@@ -19,6 +19,7 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const cssExtractor =
   new ExtractTextPlugin('assets/[name].[contenthash].css');
@@ -26,18 +27,18 @@ const cssExtractor =
 const lessExtractor =
   new ExtractTextPlugin('assets/[name].[contenthash].css');
 
-const ENV = process.env.NODE_ENV = process.env.ENV = 'production';
+const ENV = process.env.NODE_ENV;
 
 module.exports = {
 
   entry: {
-    'polyfills': path.resolve(__dirname, '../src/polyfills.ts'),
-    'vendor': path.resolve(__dirname, '../src/vendor.ts'),
-    'app': path.resolve(__dirname, '../src/main.ts')
+    'polyfills': path.resolve(__dirname, './src/polyfills.ts'),
+    'vendor': path.resolve(__dirname, './src/vendor.ts'),
+    'app': path.resolve(__dirname, './src/main.ts')
   },
 
   output: {
-    path: path.resolve(__dirname, '../dist'),
+    path: path.resolve(__dirname, './dist'),
     publicPath: '/',
     filename: '[name].[hash].js',
     chunkFilename: '[id].[hash].chunk.js'
@@ -62,7 +63,7 @@ module.exports = {
           {
             loader: 'awesome-typescript-loader',
             options: {
-              configFileName: path.resolve(__dirname, './ts.config.json')
+              configFileName: path.resolve(__dirname, './tsconfig.json')
             }
           },
           'angular2-template-loader'
@@ -81,25 +82,34 @@ module.exports = {
         loader: cssExtractor.extract([ 'css-loader' ])
       },
       {
-        test: /\.less$/,
-        loader: lessExtractor.extract([
-          'style-loader',
-          'css-loader',
-          'less-loader'
-        ])
+        test: /\.scss$/,
+        loader: lessExtractor.extract({
+          use: [
+            'css-loader',
+            {
+              loader: 'postcss-loader',
+              options: {
+                plugins: () => [ require('precss'), require('autoprefixer') ]
+              }
+            },
+            'sass-loader'
+          ],
+          fallback: 'style-loader'
+        })
       },
     ]
   },
 
   plugins: [
+    new CleanWebpackPlugin(['dist']),
+
     cssExtractor,
 
     lessExtractor,
 
     new webpack.ContextReplacementPlugin(
-      /angular(\\|\/)core(\\|\/)@angular/,
-      path.resolve(__dirname, '../src'),
-      {}
+      /angular(\\|\/)core(\\|\/)(@angular|esm5)/,
+      path.resolve(__dirname, './src')
     ),
 
     new webpack.optimize.CommonsChunkPlugin({
@@ -112,7 +122,9 @@ module.exports = {
 
     new webpack.DefinePlugin({
       'process.env': {
-        'ENV': JSON.stringify(ENV)
+        'ENV': JSON.stringify(ENV),
+        'production': JSON.stringify(ENV === 'production'),
+        'development': JSON.stringify(ENV === 'development')
       }
     }),
 

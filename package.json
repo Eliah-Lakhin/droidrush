@@ -9,30 +9,39 @@
   },
   "license": "GPL-3.0",
   "scripts": {
-    "start": "NODE_ENV=development webpack-dev-server --config ./config/webpack.config.js",
-    "build": "NODE_ENV=production webpack --config ./config/webpack.config.js"
+    "start": "NODE_ENV=development webpack-dev-server",
+    "build": "NODE_ENV=production webpack"
   },
   "dependencies": {
     "@angular/common": "5.0.5",
     "@angular/compiler": "5.0.5",
     "@angular/core": "5.0.5",
+    "@angular/forms": "5.0.5",
     "@angular/http": "5.0.5",
     "@angular/platform-browser": "5.0.5",
     "@angular/platform-browser-dynamic": "5.0.5",
     "@angular/router": "5.0.5",
+    "@ng-bootstrap/ng-bootstrap": "1.0.0-beta.6",
     "@types/node": "8.0.53",
+    "bootstrap": "4.0.0-beta.2",
     "core-js": "2.5.1",
-    "rxjs": "5.5.3"
+    "rxjs": "5.5.3",
+    "zone.js": "0.8.18"
   },
   "devDependencies": {
     "angular2-template-loader": "0.6.2",
+    "autoprefixer": "7.1.6",
     "awesome-typescript-loader": "3.4.1",
+    "clean-webpack-plugin": "0.1.17",
     "css-loader": "0.28.7",
     "extract-text-webpack-plugin": "3.0.2",
     "file-loader": "1.1.5",
     "html-loader": "0.5.1",
     "html-webpack-plugin": "2.30.1",
-    "less-loader": "4.0.5",
+    "node-sass": "4.7.2",
+    "postcss-loader": "2.0.9",
+    "precss": "2.0.0",
+    "sass-loader": "6.0.6",
     "style-loader": "0.19.0",
     "typescript": "2.6.2",
     "webpack": "3.9.1",
