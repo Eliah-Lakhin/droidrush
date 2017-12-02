@@ -15,7 +15,7 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import './styles/_custom.scss';
+import './styles/theme.scss';
 
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
@@ -26,4 +26,17 @@ if (process.env.production) {
   enableProdMode();
 }
 
-platformBrowserDynamic().bootstrapModule(AppModule);
+platformBrowserDynamic()
+  .bootstrapModule(AppModule)
+  .then(ref => {
+    if (process.env.production) {
+      return;
+    }
+
+    if (window['ngRef']) {
+      window['ngRef'].destroy();
+    }
+
+    window['ngRef'] = ref;
+  })
+  .catch(err => console.error(err));

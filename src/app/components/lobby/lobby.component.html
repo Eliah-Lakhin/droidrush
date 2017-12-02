@@ -1,0 +1,154 @@
+<div class="row">
+  <div class="col-sm-8">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Active Rooms</h4>
+        <div class="list-group">
+          <div
+             class="list-group-item
+                    d-flex
+                    justify-content-between
+                    list-group-item-action"
+             *ngFor="let room of roomStream | async">
+            {{room.title}}
+            <small class="badge"
+                   [ngClass]="{ 'badge-success': room.players?.length < room.maxPlayers,
+                                'badge-secondary': room.players?.length === room.maxPlayers }">
+              {{room.players?.length}} / {{room.maxPlayers}}
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-4">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">New Room</h4>
+        <form (ngSubmit)="createRoom()"
+              #roomForm="ngForm"
+              novalidate>
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text"
+                   class="form-control"
+                   id="title"
+                   name="title"
+                   [(ngModel)]="room.title"
+                   #title="ngModel"
+                   required />
+            <small class="text-danger"
+                 [hidden]="title.valid || title.pristine">
+              Title is required
+            </small>
+          </div>
+
+          <div class="form-group">
+            <label for="planets">Planets</label>
+            <input type="number"
+                   class="form-control"
+                   id="planets"
+                   name="planets"
+                   [(ngModel)]="room.planets"
+                   #planets="ngModel"
+                   required
+                   [min]="room.maxPlayers"
+                   max="10" />
+            <small class="text-danger"
+                 [hidden]="planets.valid || planets.pristine">
+              <ng-container *ngIf="planets.errors?.required">
+                Planet number is required
+              </ng-container>
+              <ng-container *ngIf="planets.errors?.min">
+                Planet number should be greater or equal to {{room.maxPlayers}}
+              </ng-container>
+              <ng-container *ngIf="planets.errors?.max">
+                Planet number should be lesser or equal to 10
+              </ng-container>
+            </small>
+          </div>
+
+          <div class="form-group">
+            <label for="maxPlayers">Max. players</label>
+            <input type="number"
+                   class="form-control"
+                   id="maxPlayers"
+                   name="maxPlayers"
+                   [(ngModel)]="room.maxPlayers"
+                   #maxPlayers="ngModel"
+                   required
+                   min="2"
+                   max="10" />
+            <small class="text-danger"
+                 [hidden]="maxPlayers.valid || maxPlayers.pristine">
+              <ng-container *ngIf="maxPlayers.errors?.required">
+                Max. player number is required
+              </ng-container>
+              <ng-container *ngIf="maxPlayers.errors?.min">
+                Max. player should be greater or equal to 2
+              </ng-container>
+              <ng-container *ngIf="maxPlayers.errors?.max">
+                Max. player should be lesser or equal to 10
+              </ng-container>
+            </small>
+          </div>
+
+          <div class="form-group">
+            <label for="width">Biard width</label>
+            <input type="number"
+                   class="form-control"
+                   id="width"
+                   name="width"
+                   [(ngModel)]="room.width"
+                   #width="ngModel"
+                   required
+                   min="300"
+                   max="1024" />
+            <small class="text-danger"
+                 [hidden]="width.valid || width.pristine">
+              <ng-container *ngIf="width.errors?.required">
+                Width number is required
+              </ng-container>
+              <ng-container *ngIf="width.errors?.min">
+                Width number should be greater or equal to 300
+              </ng-container>
+              <ng-container *ngIf="width.errors?.max">
+                Width number should be lesser or equal to 1024
+              </ng-container>
+            </small>
+          </div>
+
+          <div class="form-group">
+            <label for="height">Board height</label>
+            <input type="number"
+                   class="form-control"
+                   id="height"
+                   name="height"
+                   [(ngModel)]="room.height"
+                   #height="ngModel"
+                   required
+                   min="200"
+                   max="768" />
+            <small class="text-danger"
+                 [hidden]="height.valid || height.pristine">
+              <ng-container *ngIf="height.errors?.required">
+                Height number is required
+              </ng-container>
+              <ng-container *ngIf="height.errors?.min">
+                Height number should be greater or equal to 200
+              </ng-container>
+              <ng-container *ngIf="height.errors?.max">
+                Height number should be lesser or equal to 768
+              </ng-container>
+            </small>
+          </div>
+
+          <button type="submit"
+                  class="btn btn-success"
+                  [disabled]="!roomForm.form.valid">Create</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
