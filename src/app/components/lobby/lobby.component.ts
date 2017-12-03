@@ -14,7 +14,9 @@ export class LobbyComponent implements OnInit {
 
   private rooms: AngularFireList<model.Room>;
 
-  constructor(private db: AngularFireDatabase) {
+  constructor(
+    private db: AngularFireDatabase
+  ) {
     this.rooms = this.db.list<model.Room>('rooms');
   }
 
@@ -24,6 +26,5 @@ export class LobbyComponent implements OnInit {
 
   createRoom() {
     this.rooms.push(this.room);
-    console.log(this.room);
   }
 }

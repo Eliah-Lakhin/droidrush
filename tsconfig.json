@@ -13,7 +13,10 @@
       "./node_modules/@types"
     ],
     "types": [
-      "node"
+      "node",
+      "lodash",
+      "webrtc",
+      "rx"
     ]
   },
   "exclude": [

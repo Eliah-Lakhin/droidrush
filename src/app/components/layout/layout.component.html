@@ -1,7 +1,15 @@
 <div class="container">
   <br/>
   <div class="jumbotron">
-    <h1 class="text-center">Droid Rush</h1>
+    <h1 class="display-3">Droid Rush</h1>
+    <ng-container *ngIf="progress < 100">
+      <hr class="my-4" />
+      <p class="lead">{{task}}</p>
+      <div class="progress">
+        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+             [ngStyle]="{ 'width.%': progress }"></div>
+      </div>
+    </ng-container>
   </div>
-  <router-outlet></router-outlet>
+  <router-outlet *ngIf="progress >= 100"></router-outlet>
 </div>
